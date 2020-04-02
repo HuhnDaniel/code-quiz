@@ -1,5 +1,5 @@
 var quizWrapper = document.querySelector("#quiz_wrapper");
-var start = document.querySelector("#startBtn");
+var startBtn = document.querySelector("#startBtn");
 var quizPrompt = document.querySelector(".quiz_prompt");
 var title = document.querySelector("#title");
 var quizAnswers = document.querySelector(".quiz_answers");
@@ -26,4 +26,6 @@ function startQuiz() {
 		answer.textContent = questionsArr[0][i];
 		quizAnswers.append(answer);
 	}
+
+	startBtn.setAttribute("style", "display: none");
 }
