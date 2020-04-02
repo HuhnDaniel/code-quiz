@@ -21,9 +21,14 @@ function startQuiz() {
 	startBtn.setAttribute("style", "display: none");
 	quizWrapper.setAttribute("style", "text-align: left;");
 
+	// function to add question to page
+	newQuestion();	
+}
+
+function newQuestion() {
 	// chose a random question
 	var whichQuestion = Math.trunc(Math.random() * questionsArr.length);
-
+	
 	// replace #title with question prompt
 	var question = document.createElement("h2");
 	question.textContent = questionsArr[whichQuestion][0];
