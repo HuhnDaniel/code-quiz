@@ -15,21 +15,26 @@ var questionsArr = [
 
 // starts quiz when start button is clicked
 function startQuiz() {
+	// remove initial elements
+	title.setAttribute("style", "display: none;");
+	description.setAttribute("style", "display: none;");
+	startBtn.setAttribute("style", "display: none");
 	quizWrapper.setAttribute("style", "text-align: left;");
+
+	// chose a random question
+	var whichQuestion = Math.trunc(Math.random() * questionsArr.length);
 
 	// replace #title with question prompt
 	var question = document.createElement("h2");
-	question.textContent = questionsArr[0][0];
-	title.setAttribute("style", "display: none;");
+	question.textContent = questionsArr[whichQuestion][0];
+	question.setAttribute("style", "padding: 8px;")
 	quizPrompt.append(question);
-
+	
 	// make elements for each answer
-	description.setAttribute("style", "display: none;");
-	for(var i = 1; i < questionsArr[0].length; i++) {
+	for(var i = 1; i < questionsArr[whichQuestion].length; i++) {
 		var answer = document.createElement("article");
-		answer.textContent = questionsArr[0][i];
+		answer.textContent = questionsArr[whichQuestion][i];
+		answer.setAttribute("style", "padding: 8px;")
 		quizAnswers.append(answer);
 	}
-
-	startBtn.setAttribute("style", "display: none");
 }
