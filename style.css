@@ -1,0 +1,41 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	display: block;
+	height: 3em;
+}
+
+#highscoreBtn {
+	position: absolute;
+	margin: 16px;
+	left: 0;
+}
+
+#clock {
+	position: absolute;
+	margin: 16px;
+	right: 0;
+}
+
+#quiz_wrapper {
+	margin: 2em auto;
+	text-align: center;
+	max-width: 50%;
+}
+
+#title {
+	padding: .5em;
+}
+
+#description {
+	padding: .5em;
+	line-height: 1.25;
+}
+
+#startBtn {
+	margin: .5em;
+	padding: .5em;
+}
