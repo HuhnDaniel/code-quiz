@@ -14,13 +14,17 @@
 	</header>
 
 	<main id="quiz_wrapper">
-		<h1 id="title">JavaScript Code Quiz</h1>
-		<p id="description">
-			Race against the clock to answer questions about JavaScript fundementals.  
-			The faster you finish, the higher your score!  Watch out for incorrect answers
-			though, you will lose time for them!
-		</p>
-		<button id="startBtn">Start Quiz!</button>
+		<section class="quiz_prompt">
+			<h1 id="title">JavaScript Code Quiz</h1>
+		</section>
+		<section class="quiz_answers">
+			<article id="description">
+				Race against the clock to answer questions about JavaScript fundementals.  
+				The faster you finish, the higher your score!  Watch out for incorrect answers
+				though, you will lose time for them!
+			</article>
+		</section>
+		<button id="startBtn" onclick="startQuiz()">Start Quiz!</button>
 	</main>
 
 <script src="script.js"></script>

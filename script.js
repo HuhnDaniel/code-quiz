@@ -1,7 +1,18 @@
 var start = document.querySelector("#startBtn");
+var quizPrompt = document.querySelector(".quiz_prompt");
+var title = document.querySelector("#title");
+// variable to hold questions/answers
+var questionsArr = [
+	["What JavaScript command would you use to print output to the browser console?", "A: console.log()", "B: alert()", "C: burgers", "D: for loop"]
+];
 
+// starts quiz when start button is clicked
 function startQuiz() {
-	
-}
+	// replace #title with question prompt
+	var question = document.createElement("h2");
+	question.textContent = questionsArr[0][0];
+	title.setAttribute("style", "display: none");
+	quizPrompt.append(question);
 
-start.addEventListener("click", startQuiz());
+	// make elements for each answer
+}
