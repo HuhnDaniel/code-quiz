@@ -13,19 +13,11 @@ var questionsArr = [
 	["Math.random() returns a number: ", "A: between -10 and 10", "B: between 0 and 1", "C: between 0 and 9", "D: between 1 and 10"]
 ];
 
-// starts quiz when start button is clicked
-function startQuiz() {
-	// remove initial elements
-	title.setAttribute("style", "display: none;");
-	description.setAttribute("style", "display: none;");
-	startBtn.setAttribute("style", "display: none");
+function newQuestion() {
+	// remove previous info from page
+	clearPage();
 	quizWrapper.setAttribute("style", "text-align: left;");
 
-	// function to add question to page
-	newQuestion();	
-}
-
-function newQuestion() {
 	// chose a random question
 	var whichQuestion = Math.trunc(Math.random() * questionsArr.length);
 	
@@ -41,5 +33,21 @@ function newQuestion() {
 		answer.textContent = questionsArr[whichQuestion][i];
 		answer.setAttribute("style", "padding: 8px;")
 		quizAnswers.append(answer);
+	}
+}
+
+// Code partially from GeeksforGeeks https://www.geeksforgeeks.org/remove-all-the-child-elements-of-a-dom-node-in-javascript/
+// function to clear elements to prepare for new elements
+function clearPage() {
+	var promptChild = quizPrompt.lastElementChild;
+	var answersChild = quizAnswers.lastElementChild;
+
+	while(promptChild) {
+		quizPrompt.removeChild(promptChild);
+		promptChild = quizPrompt.lastElementChild;
+	}
+	while(answersChild) {
+		quizAnswers.removeChild(answersChild);
+		answersChild = quizAnswers.lastElementChild;
 	}
 }
