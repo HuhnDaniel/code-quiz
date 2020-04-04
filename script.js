@@ -4,6 +4,7 @@ var quizPrompt = document.querySelector(".quiz_prompt");
 var title = document.querySelector(".title");
 var quizAnswers = document.querySelector(".quiz_answers");
 var description = document.querySelector(".description");
+
 // variable to hold questions/answers
 var questionsArr = [
 	["What JavaScript command would you use to print output to the browser console?", "A: console.log()", "B: alert()", "C: prompt()", "D: for loop"],
@@ -12,8 +13,14 @@ var questionsArr = [
 	["In JavaScript, strict equality is symbolized by: ", "A: ==", "B: .isEqual()", "C: !=", "D: ==="],
 	["Math.random() returns a number: ", "A: between -10 and 10", "B: between 0 and 1", "C: between 0 and 9", "D: between 1 and 10"]
 ];
+var QUIZ_LENGTH = 5;
+var questionsUsed = ""; // collects indexes of used questions
 
-function newQuestion() {
+function newQuestion(e) {
+	if(e.target.matches("button") === false) {
+		return;
+	}
+
 	// remove previous info from page
 	clearPage();
 	quizWrapper.setAttribute("style", "text-align: left;");
@@ -53,3 +60,4 @@ function clearPage() {
 }
 
 startBtn.addEventListener("click", newQuestion);
+quizAnswers.addEventListener("click", newQuestion);
