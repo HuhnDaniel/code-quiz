@@ -1,9 +1,9 @@
-var quizWrapper = document.querySelector("#quiz_wrapper");
-var startBtn = document.querySelector("#startBtn");
+var quizWrapper = document.querySelector(".quiz_wrapper");
+var startBtn = document.querySelector(".startBtn");
 var quizPrompt = document.querySelector(".quiz_prompt");
-var title = document.querySelector("#title");
+var title = document.querySelector(".title");
 var quizAnswers = document.querySelector(".quiz_answers");
-var description = document.querySelector("#description");
+var description = document.querySelector(".description");
 // variable to hold questions/answers
 var questionsArr = [
 	["What JavaScript command would you use to print output to the browser console?", "A: console.log()", "B: alert()", "C: prompt()", "D: for loop"],
@@ -29,9 +29,9 @@ function newQuestion() {
 	
 	// make elements for each answer
 	for(var i = 1; i < questionsArr[whichQuestion].length; i++) {
-		var answer = document.createElement("article");
+		var answer = document.createElement("button");
 		answer.textContent = questionsArr[whichQuestion][i];
-		answer.setAttribute("style", "padding: 8px;")
+		answer.setAttribute("class", "answerBtn btn");
 		quizAnswers.append(answer);
 	}
 }
@@ -51,3 +51,5 @@ function clearPage() {
 		answersChild = quizAnswers.lastElementChild;
 	}
 }
+
+startBtn.addEventListener("click", newQuestion);
