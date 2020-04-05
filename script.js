@@ -4,6 +4,8 @@ var quizPrompt = document.querySelector(".quiz_prompt");
 var title = document.querySelector(".title");
 var quizAnswers = document.querySelector(".quiz_answers");
 var description = document.querySelector(".description");
+var clock = document.querySelector(".clock");
+var quizInput = document.querySelector(".quiz_input");
 
 // variable to hold questions/answers
 var questionsArr = [
@@ -14,8 +16,13 @@ var questionsArr = [
 	["Math.random() returns a number: ", "A: between -10 and 10", "B: between 0 and 1", "C: between 0 and 9", "D: between 1 and 10"]
 ];
 var QUIZ_LENGTH = 5;
-var questionNumber = 0;
+var TIME = 75;
+var questionNumber = 1;
 var questionsUsed = ""; // collects indexes of used questions
+
+function newQuiz(e) {
+	newQuestion(e);
+}
 
 function newQuestion(e) {
 	if(e.target.matches("button") === false) {
@@ -26,13 +33,11 @@ function newQuestion(e) {
 		finishQuiz();
 		return;
 	}
-	questionNumber++;
-	console.log(questionNumber);
-
+	
 	// remove previous info from page
 	clearPage();
 	quizWrapper.setAttribute("style", "text-align: left;");
-
+	
 	// chose a random question (non repeated)
 	do {
 		var whichQuestion = Math.trunc(Math.random() * questionsArr.length);
@@ -53,13 +58,14 @@ function newQuestion(e) {
 		answer.setAttribute("class", "answerBtn btn");
 		quizAnswers.append(answer);
 	}
-
+	
+	questionNumber++;
 }
 
 function finishQuiz() {
 	clearPage();
 	quizWrapper.setAttribute("style", "text-align: center;");
-
+	
 	var congrats = document.createElement("h2");
 	congrats.textContent = "Congratulations! You have finished the quiz!";
 	quizPrompt.append(congrats);
@@ -70,6 +76,7 @@ function finishQuiz() {
 function clearPage() {
 	var promptChild = quizPrompt.lastElementChild;
 	var answersChild = quizAnswers.lastElementChild;
+	var inputChild = quizInput.lastElementChild;
 
 	while(promptChild) {
 		quizPrompt.removeChild(promptChild);
@@ -79,6 +86,11 @@ function clearPage() {
 		quizAnswers.removeChild(answersChild);
 		answersChild = quizAnswers.lastElementChild;
 	}
+	while(inputChild) {
+		quizInput.removeChild(inputChild);
+		inputChild = quizInput.lastElementChild;
+	}
 }
 
+startBtn.addEventListener("click", newQuiz);
 quizAnswers.addEventListener("click", newQuestion);
