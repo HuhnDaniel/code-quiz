@@ -17,7 +17,7 @@ var questionsArr = [
 ];
 var QUIZ_LENGTH = 5;
 var TIME = 75;
-var questionNumber = 1;
+var questionNumber = 0;
 var questionsUsed = ""; // collects indexes of used questions
 var quizOver = false;
 
@@ -32,8 +32,7 @@ function newQuestion(e) {
 	}
 
 	if(questionNumber >= QUIZ_LENGTH) {
-		finishQuiz();
-		return;
+		quizOver = true;
 	}
 	
 	// remove previous info from page
@@ -50,7 +49,7 @@ function newQuestion(e) {
 	// replace #title with question prompt
 	var question = document.createElement("h2");
 	question.textContent = questionsArr[whichQuestion][0];
-	question.setAttribute("style", "padding: 8px;")
+	question.setAttribute("style", "padding: 8px;");
 	quizPrompt.append(question);
 	
 	// make elements for each answer
@@ -68,8 +67,8 @@ function countdown(t) {
 	clock.textContent = t;
 
 	if(t === 0 || quizOver === true) {
-		var score = t
-		finishQuiz();
+		var score = t;
+		finishQuiz(score);
 		return;
 	}
 
@@ -86,7 +85,19 @@ function finishQuiz(score) {
 	
 	var congrats = document.createElement("h2");
 	congrats.textContent = "Congratulations! You have finished the quiz!";
+	congrats.setAttribute("style", "padding: 8px;");
 	quizPrompt.append(congrats);
+
+	var scorePara = document.createElement("article");
+	scorePara.textContent = "Your final score was " + score + "!";
+	scorePara.setAttribute("class", "description;")
+	quizAnswers.append(scorePara);
+
+	var initialsForm = document.createElement("form");
+	initialsForm.innerHTML = "<label for=\"inputInitials\">Input initials:</label>\n\
+							  <input type=\"text\" id=\"inputInitials\" name=\"inputInitials\" />\n\
+							  <button class=\"submitBtn\">Submit</button>";
+	quizInput.append(initialsForm);
 }
 
 // Code partially from GeeksforGeeks https://www.geeksforgeeks.org/remove-all-the-child-elements-of-a-dom-node-in-javascript/
