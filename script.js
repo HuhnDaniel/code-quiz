@@ -1,3 +1,4 @@
+var highcoreBtn = document.querySelector(".highscoreBtn");
 var quizWrapper = document.querySelector(".quiz_wrapper");
 var startBtn = document.querySelector(".startBtn");
 var quizPrompt = document.querySelector(".quiz_prompt");
@@ -69,7 +70,6 @@ function newQuestion(e) {
 }
 
 function countdown() {
-	
 	if(t === 0) {
 		finishQuiz(t);
 		return;
@@ -79,6 +79,7 @@ function countdown() {
 	oneSec = setTimeout(function() {
 		countdown(t);
 	}, 1000);
+
 	clock.textContent = t;
 }
 
@@ -130,5 +131,12 @@ function clearPage() {
 	}
 }
 
+function showHighscores(e) {
+	e.preventDefault();
+	console.log("hi");
+}
+
+highcoreBtn.addEventListener("click", showHighscores);
 startBtn.addEventListener("click", newQuiz);
 quizAnswers.addEventListener("click", newQuestion);
+quizInput.addEventListener("submit", showHighscores);
