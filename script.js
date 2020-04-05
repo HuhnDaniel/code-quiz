@@ -57,7 +57,12 @@ function newQuestion(e) {
 }
 
 function finishQuiz() {
-	
+	clearPage();
+	quizWrapper.setAttribute("style", "text-align: center;");
+
+	var congrats = document.createElement("h2");
+	congrats.textContent = "Congratulations! You have finished the quiz!";
+	quizPrompt.append(congrats);
 }
 
 // Code partially from GeeksforGeeks https://www.geeksforgeeks.org/remove-all-the-child-elements-of-a-dom-node-in-javascript/
