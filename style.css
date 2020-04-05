@@ -15,7 +15,6 @@
 }
 
 .btn {
-	display: block;
 	margin: 1em;
 	padding: .5em;
 }
@@ -43,4 +42,8 @@
 
 .startBtn {
 	display: inline-block;
+}
+
+.answerBtn {
+	display: block;
 }

@@ -13,7 +13,9 @@ var questionsArr = [
 	["JavaScript arrays can contain: ", "A: strings", "B: numbers", "C: arrays", "D: all of these"],
 	["What JavaScript control structure would you use to repeat code multiple times?", "A: if statement", "B: for loop", "C: switch", "D: function()"],
 	["In JavaScript, strict equality is symbolized by: ", "A: ==", "B: .isEqual()", "C: !=", "D: ==="],
-	["Math.random() returns a number: ", "A: between -10 and 10", "B: between 0 and 1", "C: between 0 and 9", "D: between 1 and 10"]
+	["Math.random() returns a number: ", "A: between -10 and 10", "B: between 0 and 1", "C: between 0 and 9", "D: between 1 and 10"],
+	["Objects contain elements in the form: ", "A: key: value", "B: index: value", "C: function: call", "D: if: else"],
+	["In JavaScript, the \"this\" operator references: ", "A: the parent object or variable", "B: the parent function", "C: the previous variable", "D: the HTML code"]
 ];
 var QUIZ_LENGTH = 5;
 var TIME = 75;
@@ -87,16 +89,17 @@ function finishQuiz(score) {
 	congrats.textContent = "Congratulations! You have finished the quiz!";
 	congrats.setAttribute("style", "padding: 8px;");
 	quizPrompt.append(congrats);
-
+	
 	var scorePara = document.createElement("article");
 	scorePara.textContent = "Your final score was " + score + "!";
 	scorePara.setAttribute("class", "description;")
 	quizAnswers.append(scorePara);
-
+	
 	var initialsForm = document.createElement("form");
 	initialsForm.innerHTML = "<label for=\"inputInitials\">Input initials:</label>\n\
 							  <input type=\"text\" id=\"inputInitials\" name=\"inputInitials\" />\n\
-							  <button class=\"submitBtn\">Submit</button>";
+							  <button class=\"submitBtn btn\">Submit</button>";
+	initialsForm.setAttribute("style", "padding: 8px;");
 	quizInput.append(initialsForm);
 }
 
