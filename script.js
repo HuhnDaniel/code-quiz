@@ -32,7 +32,7 @@ function newQuiz(e) {
 }
 
 function newQuestion(e) {
-	if(e.target.matches("button") === false) {
+	if(!e.target.matches("button")) {
 		return;
 	}
 
@@ -99,7 +99,7 @@ function finishQuiz(score) {
 	
 	var scorePara = document.createElement("article");
 	scorePara.textContent = "Your final score was " + score + "!";
-	scorePara.setAttribute("class", "description;")
+	scorePara.setAttribute("class", "description")
 	quizAnswers.append(scorePara);
 	
 	var initialsForm = document.createElement("form");
@@ -108,6 +108,49 @@ function finishQuiz(score) {
 							  <button class=\"submitBtn btn\">Submit</button>";
 	initialsForm.setAttribute("style", "padding: 8px;");
 	quizInput.append(initialsForm);
+}
+
+function showHighscores(e) {
+	e.preventDefault();
+	clearPage();
+
+	var title = document.createElement("h1");
+	title.textContent = "High Scores:";
+	title.setAttribute("class", "title");
+	quizPrompt.append(title);
+
+	var backBtn = document.createElement("button");
+	backBtn.textContent = "Restart Quiz";
+	backBtn.setAttribute("class", "backBtn btn");
+	quizInput.append(backBtn);
+
+	var clearBtn = document.createElement("button");
+	clearBtn.textContent = "Clear List";
+	clearBtn.setAttribute("class", "clearBtn btn");
+	quizInput.append(clearBtn);
+}
+
+function inputButtons(e) {
+	console.dir(e.target);
+	e.preventDefault();
+
+	switch(e.target.classList[0]) {
+		case "startBtn":
+			newQuiz(e);
+			break;
+
+		case "submitBtn":
+			showHighscores(e);
+			break;
+
+		case "backBtn":
+			startPage();
+			break;
+
+		case "clearBtn":
+			clearList();
+			break;
+	}
 }
 
 // Code partially from GeeksforGeeks https://www.geeksforgeeks.org/remove-all-the-child-elements-of-a-dom-node-in-javascript/
@@ -131,12 +174,7 @@ function clearPage() {
 	}
 }
 
-function showHighscores(e) {
-	e.preventDefault();
-	console.log("hi");
-}
 
 highcoreBtn.addEventListener("click", showHighscores);
-startBtn.addEventListener("click", newQuiz);
 quizAnswers.addEventListener("click", newQuestion);
-quizInput.addEventListener("submit", showHighscores);
+quizInput.addEventListener("click", inputButtons);
