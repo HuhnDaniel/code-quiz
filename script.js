@@ -21,11 +21,11 @@ var questionsArr = [
 var QUIZ_LENGTH = 5;
 var TIME = 75;
 var INITIAL_QUESTION = 0;
+var questionNumber;
 var USED_STRING = ""; // collects indexes of used questions
+var questionsUsed;
 var oneSec;
 var t;
-var questionNumber;
-var questionsUsed;
 
 function newQuiz(e) {
 	t = TIME;
@@ -56,16 +56,23 @@ function newQuestion(e) {
 	while(questionsUsed.includes(whichQuestion));
 	questionsUsed += whichQuestion;
 	
-	// replace #title with question prompt
+	// replace #title with question prompt (randomized)
 	var question = document.createElement("h2");
 	question.textContent = questionsArr[whichQuestion][0];
 	question.setAttribute("style", "padding: 8px;");
 	quizPrompt.append(question);
 	
-	// make elements for each answer
+	// make elements for each answer (randomized)
+	var answersUsed = "";
 	for(var i = 1; i < questionsArr[whichQuestion].length; i++) {
+		do {
+			var whichAnswer = Math.ceil(Math.random() * (questionsArr[whichQuestion].length - 1));
+		}
+		while(answersUsed.includes(whichAnswer));
+		answersUsed += whichAnswer;
+
 		var answer = document.createElement("button");
-		answer.textContent = questionsArr[whichQuestion][i];
+		answer.textContent = questionsArr[whichQuestion][whichAnswer];
 		answer.setAttribute("class", "answerBtn btn");
 		quizAnswers.append(answer);
 	}
@@ -165,7 +172,6 @@ function clearList() {
 }
 
 function inputButtons(e) {
-	console.dir(e.target);
 	e.preventDefault();
 
 	switch(e.target.classList[0]) {
