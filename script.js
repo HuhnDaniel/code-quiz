@@ -19,6 +19,7 @@ var QUIZ_LENGTH = 5;
 var TIME = 75;
 var questionNumber = 1;
 var questionsUsed = ""; // collects indexes of used questions
+var quizOver = false;
 
 function newQuiz(e) {
 	newQuestion(e);
@@ -65,9 +66,8 @@ function newQuestion(e) {
 
 function countdown(t) {
 	clock.textContent = t;
-	console.log(t);
 
-	if(t === 0) {
+	if(t === 0 || quizOver === true) {
 		var score = t
 		finishQuiz();
 		return;
@@ -80,6 +80,7 @@ function countdown(t) {
 }
 
 function finishQuiz(score) {
+	quizOver = true;
 	clearPage();
 	quizWrapper.setAttribute("style", "text-align: center;");
 	
