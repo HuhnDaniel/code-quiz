@@ -10,13 +10,13 @@ var quizInput = document.querySelector(".quiz_input");
 
 // variable to hold questions/answers
 var questionsArr = [
-	["What JavaScript command would you use to print output to the browser console?", "A: console.log()", "B: alert()", "C: prompt()", "D: for loop"],
-	["JavaScript arrays can contain: ", "A: strings", "B: numbers", "C: arrays", "D: all of these"],
-	["What JavaScript control structure would you use to repeat code multiple times?", "A: if statement", "B: for loop", "C: switch", "D: function()"],
-	["In JavaScript, strict equality is symbolized by: ", "A: ==", "B: .isEqual()", "C: !=", "D: ==="],
-	["Math.random() returns a number: ", "A: between -10 and 10", "B: between 0 and 1", "C: between 0 and 9", "D: between 1 and 10"],
-	["Objects contain elements in the form: ", "A: key: value", "B: index: value", "C: function: call", "D: if: else"],
-	["In JavaScript, the \"this\" operator references: ", "A: the parent object or variable", "B: the parent function", "C: the previous variable", "D: the HTML code"]
+	["What JavaScript command would you use to print output to the browser console?", "console.log()", "alert()", "prompt()", "for loop"],
+	["JavaScript arrays can contain: ", "all of these" , "strings", "numbers", "arrays"],
+	["What JavaScript control structure would you use to repeat code multiple times?", "for loop", "if statement", "switch", "function()"],
+	["In JavaScript, strict equality is symbolized by: ", "===" , "==", ".isEqual()", "!="],
+	["Math.random() returns a number: ", "between 0 and 1", "between -10 and 10", "between 0 and 9", "between 1 and 10"],
+	["Objects contain elements in the form: ", "key: value", "index: value", "function: call", "if: else"],
+	["In JavaScript, the \"this\" operator references: ", "the parent object or variable", "the parent function", "the previous variable", "the HTML code"]
 ];
 var QUIZ_LENGTH = 5;
 var TIME = 75;
@@ -72,7 +72,7 @@ function newQuestion(e) {
 		answersUsed += whichAnswer;
 
 		var answer = document.createElement("button");
-		answer.textContent = questionsArr[whichQuestion][whichAnswer];
+		answer.textContent = i + ":  " + questionsArr[whichQuestion][whichAnswer];
 		answer.setAttribute("class", "answerBtn btn");
 		quizAnswers.append(answer);
 	}
