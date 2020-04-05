@@ -22,6 +22,7 @@ var questionsUsed = ""; // collects indexes of used questions
 
 function newQuiz(e) {
 	newQuestion(e);
+	countdown(TIME);
 }
 
 function newQuestion(e) {
@@ -62,7 +63,23 @@ function newQuestion(e) {
 	questionNumber++;
 }
 
-function finishQuiz() {
+function countdown(t) {
+	clock.textContent = t;
+	console.log(t);
+
+	if(t === 0) {
+		var score = t
+		finishQuiz();
+		return;
+	}
+
+	t--;
+	setTimeout(function() {
+		countdown(t);
+	}, 1000);
+}
+
+function finishQuiz(score) {
 	clearPage();
 	quizWrapper.setAttribute("style", "text-align: center;");
 	
