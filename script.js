@@ -14,6 +14,7 @@ var questionsArr = [
 	["Math.random() returns a number: ", "A: between -10 and 10", "B: between 0 and 1", "C: between 0 and 9", "D: between 1 and 10"]
 ];
 var QUIZ_LENGTH = 5;
+var questionNumber = 0;
 var questionsUsed = ""; // collects indexes of used questions
 
 function newQuestion(e) {
@@ -21,12 +22,23 @@ function newQuestion(e) {
 		return;
 	}
 
+	if(questionNumber >= QUIZ_LENGTH) {
+		finishQuiz();
+		return;
+	}
+	questionNumber++;
+	console.log(questionNumber);
+
 	// remove previous info from page
 	clearPage();
 	quizWrapper.setAttribute("style", "text-align: left;");
 
-	// chose a random question
-	var whichQuestion = Math.trunc(Math.random() * questionsArr.length);
+	// chose a random question (non repeated)
+	do {
+		var whichQuestion = Math.trunc(Math.random() * questionsArr.length);
+	}
+	while(questionsUsed.includes(whichQuestion));
+	questionsUsed += whichQuestion;
 	
 	// replace #title with question prompt
 	var question = document.createElement("h2");
@@ -41,6 +53,11 @@ function newQuestion(e) {
 		answer.setAttribute("class", "answerBtn btn");
 		quizAnswers.append(answer);
 	}
+
+}
+
+function finishQuiz() {
+	
 }
 
 // Code partially from GeeksforGeeks https://www.geeksforgeeks.org/remove-all-the-child-elements-of-a-dom-node-in-javascript/
@@ -59,5 +76,4 @@ function clearPage() {
 	}
 }
 
-startBtn.addEventListener("click", newQuestion);
 quizAnswers.addEventListener("click", newQuestion);
