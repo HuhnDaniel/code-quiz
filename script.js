@@ -21,9 +21,11 @@ var QUIZ_LENGTH = 5;
 var TIME = 75;
 var questionNumber = 0;
 var questionsUsed = ""; // collects indexes of used questions
-var quizOver = false;
+var oneSec;
+var t;
 
 function newQuiz(e) {
+	t = TIME;
 	newQuestion(e);
 	countdown(TIME);
 }
@@ -34,7 +36,8 @@ function newQuestion(e) {
 	}
 
 	if(questionNumber >= QUIZ_LENGTH) {
-		quizOver = true;
+		stopCountdown();
+		return;
 	}
 	
 	// remove previous info from page
@@ -65,23 +68,26 @@ function newQuestion(e) {
 	questionNumber++;
 }
 
-function countdown(t) {
-	clock.textContent = t;
-
-	if(t === 0 || quizOver === true) {
-		var score = t;
-		finishQuiz(score);
+function countdown() {
+	
+	if(t === 0) {
+		finishQuiz(t);
 		return;
 	}
-
+	
 	t--;
-	setTimeout(function() {
+	oneSec = setTimeout(function() {
 		countdown(t);
 	}, 1000);
+	clock.textContent = t;
+}
+
+function stopCountdown() {
+	finishQuiz(t);
+	clearTimeout(oneSec);
 }
 
 function finishQuiz(score) {
-	quizOver = true;
 	clearPage();
 	quizWrapper.setAttribute("style", "text-align: center;");
 	
