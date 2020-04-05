@@ -20,15 +20,19 @@ var questionsArr = [
 ];
 var QUIZ_LENGTH = 5;
 var TIME = 75;
-var questionNumber = 0;
-var questionsUsed = ""; // collects indexes of used questions
+var INITIAL_QUESTION = 0;
+var USED_STRING = ""; // collects indexes of used questions
 var oneSec;
 var t;
+var questionNumber;
+var questionsUsed;
 
 function newQuiz(e) {
 	t = TIME;
+	questionNumber = INITIAL_QUESTION;
+	questionsUsed = USED_STRING;
 	newQuestion(e);
-	countdown(TIME);
+	countdown(t);
 }
 
 function newQuestion(e) {
@@ -130,6 +134,36 @@ function showHighscores(e) {
 	quizInput.append(clearBtn);
 }
 
+function startPage() {
+	clearPage();
+	t = 0;
+	clock.textContent = t;
+
+	var title = document.createElement("h1");
+	title.textContent = "JavaScript Code Quiz";
+	title.setAttribute("class", "title");
+	quizPrompt.append(title);
+
+	var description = document.createElement("article");
+	description.textContent = "Race against the clock to answer questions about JavaScript fundamentals.  The faster you finish, the higher your score!  Watch out for incorrect answers though, you will lose time for them!";
+	description.setAttribute("class", "description");
+	quizAnswers.append(description);
+
+	var start = document.createElement("button");
+	start.textContent = "Start Quiz!";
+	start.setAttribute("class", "startBtn btn");
+	quizInput.append(start);
+}
+
+function clearList() {
+	var answersChild = quizAnswers.lastElementChild;
+
+	while(answersChild) {
+		quizAnswers.removeChild(answersChild);
+		answersChild = quizAnswers.lastElementChild;
+	}
+}
+
 function inputButtons(e) {
 	console.dir(e.target);
 	e.preventDefault();
@@ -173,7 +207,6 @@ function clearPage() {
 		inputChild = quizInput.lastElementChild;
 	}
 }
-
 
 highcoreBtn.addEventListener("click", showHighscores);
 quizAnswers.addEventListener("click", newQuestion);
