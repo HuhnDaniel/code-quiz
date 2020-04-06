@@ -37,10 +37,12 @@ function newQuiz(e) {
 }
 
 function newQuestion(e) {
+	// makes sure a button was clicked
 	if(!e.target.matches("button")) {
 		return;
 	}
 	
+	// if quizlength number of questions have been answered, stops the quiz
 	if(questionNumber >= QUIZ_LENGTH) {
 		stopCountdown(e);
 		return;
@@ -67,12 +69,15 @@ function newQuestion(e) {
 	// make elements for each answer (randomized)
 	var answersUsed = "";
 	for(var i = 1; i < questionsArr[whichQuestion].length; i++) {
+
+		// populate a list of answers randomly, make sure no repeats
 		do {
 			var whichAnswer = Math.ceil(Math.random() * (questionsArr[whichQuestion].length - 1));
 		}
 		while(answersUsed.includes(whichAnswer));
 		answersUsed += whichAnswer;
 
+		// create html for new answer
 		var answer = document.createElement("button");
 		answer.textContent = i + ":  " + questionsArr[whichQuestion][whichAnswer];
 		answer.setAttribute("class", "answerBtn btn");
@@ -87,6 +92,7 @@ function newQuestion(e) {
 	questionNumber++;
 }
 
+// function to start countdown
 function countdown() {
 	if(t === 0) {
 		stopCountdown();
@@ -94,6 +100,8 @@ function countdown() {
 	}
 	
 	t--;
+
+	// run countdown function on one second intervals
 	oneSec = setTimeout(function() {
 		countdown();
 	}, 1000);
@@ -101,11 +109,13 @@ function countdown() {
 	clock.textContent = t;
 }
 
+// function to stop countdown when either no more questions or time is up
 function stopCountdown(e) {
 	finishQuiz(e);
 	clearTimeout(oneSec);
 }
 
+// function to check if answer clicked was the correct one, display if previous answer was right or wrong
 function checkAnswer(e) {
 	var correctIncorrect;
 	if(e.target.classList[0] === "answerBtn") {
@@ -121,12 +131,14 @@ function checkAnswer(e) {
 			correctIncorrect.setAttribute("class", "description");
 			correctness.append(correctIncorrect);
 			
+			// remove time for incorrect answer
 			t -= 10;
 			clock.textContent = t;
 		}
 	}
 }
 
+// function to populate initial submission page when quiz is over
 function finishQuiz(e) {
 	clearPage();
 	checkAnswer(e);
@@ -150,6 +162,7 @@ function finishQuiz(e) {
 	initialsForm.setAttribute("style", "padding: 8px;");
 	quizInput.append(initialsForm);
 
+	// when initials are submitted
 	var input = document.querySelector(".submitBtn");
 	input.addEventListener("click", function(e) {
 		var player = {
@@ -157,14 +170,19 @@ function finishQuiz(e) {
 			score: t,
 		}
 
+		// check to see if something is actually submitted
 		if(player.name === "") {
 			alert("Initials cannot be blank");
 		} else {
+
 			var playerArray = [];
+
+			// check if there is already a player array
 			if(localStorage.getItem("playerArray") !== null) {
 				playerArray = (JSON.parse(localStorage.getItem("playerArray")));
 			}
 
+			// add current player to array
 			playerArray.push(player);
 			localStorage.setItem("playerArray", JSON.stringify(playerArray));
 
@@ -173,6 +191,7 @@ function finishQuiz(e) {
 	});
 }
 
+// function to populate high scores page
 function showHighscores(e) {
 	e.preventDefault();
 	clearPage();
@@ -182,9 +201,11 @@ function showHighscores(e) {
 	title.setAttribute("class", "title");
 	quizPrompt.append(title);
 
+	// check if player array is in local storage
 	if(localStorage.getItem("playerArray") !== null) {
 		var playerArray = JSON.parse(localStorage.getItem("playerArray"));
 
+		// bubble sort to sort player array
 		for(var i = 0; i < (playerArray.length - 1); i++) {
 			for(var j = 0; j < (playerArray.length - 1); j++) {
 				if(playerArray[j].score < playerArray[j + 1].score) {
@@ -195,6 +216,7 @@ function showHighscores(e) {
 			}
 		}
 
+		// populate high scores section
 		playerArray.forEach(player => {
 			var playerSlot = document.createElement("article");
 			playerSlot.setAttribute("class", "player_slot");
@@ -223,6 +245,7 @@ function showHighscores(e) {
 	quizInput.append(clearBtn);
 }
 
+// populates start page when you reset the quiz
 function startPage() {
 	clearPage();
 	t = 0;
@@ -244,6 +267,7 @@ function startPage() {
 	quizInput.append(start);
 }
 
+// clears .quiz_answers in HTML file
 function clearList() {
 	var answersChild = quizAnswers.lastElementChild;
 
@@ -255,6 +279,7 @@ function clearList() {
 	localStorage.clear();
 }
 
+// takes button input and directs to associated function
 function inputButtons(e) {
 	e.preventDefault();
 
