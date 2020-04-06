@@ -47,3 +47,20 @@
 .answerBtn {
 	display: block;
 }
+
+.player_slot {
+	display: flex;
+	justify-content: space-around;
+}
+
+.player_slot:nth-child(even) {
+	background-color: lightgray;
+}
+
+.player_slot:nth-child(odd) {
+	background-color: lightslategray;
+}
+
+.player_info {
+	padding: .5em;
+}
