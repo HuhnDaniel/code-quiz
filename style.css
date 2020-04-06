@@ -5,7 +5,8 @@
 
 .header {
 	display: block;
-	height: 3em;
+	height: 3.5em;
+	background-color: rgb(223, 245, 250);
 }
 
 .highscoreBtn {
@@ -17,6 +18,7 @@
 .btn {
 	margin: 1em;
 	padding: .5em;
+	background-color: skyblue;
 }
 
 .clock {
@@ -50,17 +52,17 @@
 
 .player_slot {
 	display: flex;
-	justify-content: space-around;
 }
 
 .player_slot:nth-child(even) {
-	background-color: lightgray;
+	background-color: rgb(223, 245, 250);
 }
 
 .player_slot:nth-child(odd) {
-	background-color: lightslategray;
+	background-color: skyblue;
 }
 
 .player_info {
+	flex: 1;
 	padding: .5em;
 }

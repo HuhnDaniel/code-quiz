@@ -185,6 +185,16 @@ function showHighscores(e) {
 	if(localStorage.getItem("playerArray") !== null) {
 		var playerArray = JSON.parse(localStorage.getItem("playerArray"));
 
+		for(var i = 0; i < (playerArray.length - 1); i++) {
+			for(var j = 0; j < (playerArray.length - 1); j++) {
+				if(playerArray[j].score < playerArray[j + 1].score) {
+					var temp = playerArray[j];
+					playerArray[j] = playerArray[j + 1];
+					playerArray[j + 1] = temp;
+				}
+			}
+		}
+
 		playerArray.forEach(player => {
 			var playerSlot = document.createElement("article");
 			playerSlot.setAttribute("class", "player_slot");
@@ -252,10 +262,6 @@ function inputButtons(e) {
 		case "startBtn":
 			newQuiz(e);
 			break;
-
-		// case "submitBtn":
-		// 	showHighscores(e);
-		// 	break;
 
 		case "backBtn":
 			startPage();
