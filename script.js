@@ -94,19 +94,21 @@ function newQuestion(e) {
 
 // function to start countdown
 function countdown() {
-	if(t === 0) {
+	if(t <= 0) {
+		t = 0;
+		clock.textContent = t;
 		stopCountdown();
 		return;
 	}
 	
-	t--;
-
+	
 	// run countdown function on one second intervals
 	oneSec = setTimeout(function() {
 		countdown();
 	}, 1000);
-
+	
 	clock.textContent = t;
+	t--;
 }
 
 // function to stop countdown when either no more questions or time is up
@@ -141,7 +143,9 @@ function checkAnswer(e) {
 // function to populate initial submission page when quiz is over
 function finishQuiz(e) {
 	clearPage();
-	checkAnswer(e);
+	if(typeof e !== "undefined") {
+		checkAnswer(e);
+	}
 	var score = t;
 	quizWrapper.setAttribute("style", "text-align: center;");
 	
