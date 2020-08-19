@@ -6,4 +6,4 @@
 - Final score is the final number on the clock
 - When the game is over save scores with initials
 ## Author
-- Daniel Moody-Huhn https://github.com/HuhnDaniel
+- Daniel Moody-Huhn https://huhndaniel.github.io
